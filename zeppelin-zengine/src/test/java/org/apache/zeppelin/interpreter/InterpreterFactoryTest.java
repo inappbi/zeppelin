@@ -136,4 +136,14 @@ public class InterpreterFactoryTest {
     InterpreterFactory factory2 = new InterpreterFactory(conf, null, null, null, depResolver);
     assertEquals(3, factory2.get().size());
   }
+
+  @Test
+  public void testInvalidInterpreterSettingName() {
+    try {
+      factory.createNewSetting("new.mock1", "mock1", new LinkedList<Dependency>(), new InterpreterOption(false), new Properties());
+      fail("expect fail because of invalid InterpreterSetting Name");
+    } catch (IOException e) {
+      assertEquals("'.' is invalid for InterpreterSetting name.", e.getMessage());
+    }
+  }
 }

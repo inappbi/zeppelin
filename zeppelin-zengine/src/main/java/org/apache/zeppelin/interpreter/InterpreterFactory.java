@@ -453,6 +453,9 @@ public class InterpreterFactory implements InterpreterGroupFactory {
       List<Dependency> dependencies,
       InterpreterOption option, Properties properties)
       throws InterpreterException, IOException, RepositoryException {
+    if (name.indexOf(".") >= 0) {
+      throw new IOException("'.' is invalid for InterpreterSetting name.");
+    }
     synchronized (interpreterSettings) {
 
       List<InterpreterSetting.InterpreterInfo> interpreterInfos =
